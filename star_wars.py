@@ -1,22 +1,27 @@
 from flask import Flask, jsonify, request
 import psycopg2
+from dotenv import load_dotenv
+import os
 
 app = Flask(__name__)
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Function to establish a connection to the database
 def get_database_connection():
     try:
         connection = psycopg2.connect(
-            dbname='Star wars hanger',
-            user='rasmussen.rhett@gmail.com',
-            password='TwoR@vens.forThird',
-            host='raja.db.elephantsql.com'
+            dbname=os.getenv('DB_NAME'),
+            user=os.getenv('DB_USER'),
+            password=os.getenv('DB_PASSWORD'),
+            host=os.getenv('DB_HOST')
         )
         return connection
     except psycopg2.Error as e:
         print("Error connecting to the database:", e)
         return None
-
+    
 # Function to close the database connection
 def close_database_connection(connection):
     if connection:
