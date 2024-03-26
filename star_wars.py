@@ -11,7 +11,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ugamvnpf:1MpfujWOdVdmpKYxBx8
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-# Define User model
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
@@ -20,7 +19,6 @@ class User(db.Model):
     def __repr__(self):
         return f'<User {self.username}>'
 
-# Define Ship model
 class Ship(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
@@ -29,7 +27,6 @@ class Ship(db.Model):
     def __repr__(self):
         return f'<Ship {self.name}>'
 
-# Routes for user CRUD operations
 @app.route('/users', methods=['GET'])
 def get_users():
     users = User.query.all()
@@ -73,7 +70,6 @@ def delete_user(user_id):
     else:
         return jsonify({'error': 'User not found'}), 404
 
-# Routes for ship CRUD operations
 @app.route('/ships', methods=['GET'])
 def get_ships():
     ships = Ship.query.all()
