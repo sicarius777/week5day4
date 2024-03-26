@@ -1,4 +1,4 @@
-ffrom flask import Flask, jsonify, request
+from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 import os
@@ -7,7 +7,7 @@ app = Flask(__name__)
 load_dotenv()
 
 # Configure SQLAlchemy
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DB_URI')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ugamvnpf:1MpfujWOdVdmpKYxBx8Bpxh7yt5BPmLh@raja.db.elephantsql.com/ugamvnpf'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
